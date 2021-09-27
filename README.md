@@ -8,13 +8,10 @@ library is missing. jQuery should already be available on LibreTexts
 library pages.
 
 ## How to Use
-1. Download the `dist` folder.
-2. Include the `libreTranslationFeedback.js` script at the end of the `<body>`
-section in standard fashion. *Note that while only the JS file needs to be
-explicitly included, the font files must be available in the same
-relative folder path.*
+1. Include the `libreTranslationFeedback.js` script (hosted on LibreTexts CDN)
+at the end of the `<body>` section in standard fashion.
 ```
-<script type='text/javascript' src='./dist/libreTranslationFeedback.js'></script>
+<script type='text/javascript' src='https://cdn.libretexts.net/github/TranslationFeedback/libreTranslationFeedback.js'></script>
 ```
 3. Create a "Submit Translation Feedback" button and register an *onClick* function
 that calls `window.libreTranslationFeedback.init()`. For example:
