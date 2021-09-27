@@ -1,0 +1,71 @@
+/**
+ * LibreTexts Translation Feedback Widget
+ * index.css (styles)
+ */
+
+/* Font */
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin');
+
+/* General Modal Styles*/
+.tf-modal * {
+    font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 1.4285em;
+}
+
+
+/* Resets */
+.tf-modal *,
+.tf-modal *:before,
+.tf-modal *:after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    line-height: 1.15;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+.tf-modal input[type="text"],
+.tf-modal input[type="email"],
+.tf-modal input[type="search"],
+.tf-modal input[type="password"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.tf-modal [type="checkbox"],
+.tf-modal [type="radio"] {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+.tf-modal [type="number"]::-webkit-inner-spin-button,
+.tf-modal [type="number"]::-webkit-outer-spin-button {
+    height: auto;
+}
+
+.tf-modal button,
+.tf-modal input, {
+    font-family: sans-serif;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0;
+}
+
+.tf-modal button,
+.tf-modal input {
+  overflow: visible;
+}
+
+.tf-modal button {
+  text-transform: none;
+}
+
+.tf-modal button,
+.tf-modal html [type="button"],
+.tf-modal [type="reset"],
+.tf-modal [type="submit"] {
+  -webkit-appearance: button;
+
+}
