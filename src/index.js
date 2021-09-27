@@ -109,29 +109,11 @@ import html from "./index.html";
     }
 
     /**
-     * Shows/hides the relevant form section on
-     * change to the "I am..." question.
-     */
-    function iAmChangeHandler(value) {
-        if (value === 'instructor') {
-            if (window.jQuery("#libreTF-student-section").is(":visible")) {
-                window.jQuery("#libreTF-student-section").hide();
-            }
-            window.jQuery("#libreTF-instructor-section").show();
-        } else if (value === 'student') {
-            if (window.jQuery("#libreTF-instructor-section").is(":visible")) {
-                window.jQuery("#libreTF-instructor-section").hide();
-            }
-            window.jQuery("#libreTF-student-section").show();
-        }
-    }
-
-    /**
      * Shows/hides the relevant fields on change
-     * to the "All terms were translated correctly question.
+     * to the "All terms were translated correctly" question.
      */
     function translationQualityChangeHandler() {
-        var termsOk = window.jQuery('#libreTF-translation-quality').checkbox('is checked');
+        let termsOk = window.jQuery('#libreTF-translation-quality').checkbox('is checked');
         if (!termsOk) {
             jQuery("#libreTF-term-feedback").show();
         } else {
@@ -211,29 +193,29 @@ import html from "./index.html";
         if (validateForm(jQuery)) {
             let formData = {
                 language: jQuery("#libreTF-language-input").val(),
-                translationOk: jQuery('#libreTF-translation-quality').checkbox('is checked'),
+                accurate: jQuery('#libreTF-translation-quality').checkbox('is checked'),
                 page: window.location.href,
                 feedback: []
             };
-            var numFields = 4;
-            for (let i = 0; i < numFields; i++) {
-                if (!isEmptyString(jQuery(`#libreTF-incorrect-term-${i+1}`).val())) {
+            if (formData.accurate === false) {
+                var numFields = 4;
+                for (let i = 0; i < numFields; i++) {
                     if (!isEmptyString(jQuery(`#libreTF-incorrect-term-${i+1}`).val())) {
-                        formData.feedback.push({
-                            incorrect: jQuery(`#libreTF-incorrect-term-${i+1}`).val(),
-                            correct: jQuery(`#libreTF-corrected-term-${i+1}`).val()
-                        });
-                    } else {
-                        formData.feedback.push({
-                            incorrect: jQuery(`#libreTF-incorrect-term-${i+1}`).val(),
-                            correct: ''
-                        });
+                        if (!isEmptyString(jQuery(`#libreTF-incorrect-term-${i+1}`).val())) {
+                            formData.feedback.push({
+                                incorrect: jQuery(`#libreTF-incorrect-term-${i+1}`).val(),
+                                corrected: jQuery(`#libreTF-corrected-term-${i+1}`).val()
+                            });
+                        } else {
+                            formData.feedback.push({
+                                incorrect: jQuery(`#libreTF-incorrect-term-${i+1}`).val(),
+                                corrected: ''
+                            });
+                        }
                     }
                 }
             }
-            console.log(formData);
-            /*
-            axios.post("https://commons.libretexts.org/api/v1/adoptionreport", formData, {
+            axios.post("https://commons.libretexts.org/api/v1/translationfeedback", formData, {
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest',
                     'Content-Type': 'application/json'
@@ -253,7 +235,6 @@ import html from "./index.html";
             }).catch(function(err) {
                 handleErr(jQuery, err);
             });
-            */
         }
         jQuery("#libreTF-submit-btn").removeClass('loading');
     }
@@ -262,7 +243,6 @@ import html from "./index.html";
      * Attaches the Translation Feedback Modal(s) to the DOM
      * and initializes interactive form components
      * from Semantic UI.
-     * @param {Object} jQuery  - the jQuery namespace object
      */
     function libreTranslationFeedback(jQuery) {
         if (jQuery("#libreTranslationFeedbackModal").length == 0) { // attach Modal to DOM
