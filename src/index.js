@@ -73,8 +73,7 @@ import html from "./index.html";
      */
     function openModal(jQuery) {
         jQuery("#libreTranslationFeedbackModal").modal({
-            closable: false,
-            blurring: true
+            closable: false
         }).modal('setting', 'duration', 300).modal('show');
     }
 
